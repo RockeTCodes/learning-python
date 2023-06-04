@@ -15,10 +15,10 @@ words = ["HOME", "LOVE", "ZOO", "THOR", "ABANDONED", "ABDOMINAL", "LION", "TIGER
          "PYTHON", "HORSE", "RABBIT", "MOUSE", "PEACOCK", "SCHOOL", "PROGRAMMING"]
 
 random_word = random.choice(words)
-print(random_word)
+
 
 random_word_length = len(random_word)
-print(random_word_length)
+print(f"The word contains {random_word_length} letters.")
 
 emptyguess = []
 for i in range(random_word_length):
@@ -176,7 +176,8 @@ def printafterwinning():
 
 while player_lives >= 0:
     if player_lives == 0:
-        print("GAME OVER")
+        print("GAME OVER 😔")
+        print(f"The word was {random_word}")
         break
     if checkifwordguessed(emptyguess):
         clear()
