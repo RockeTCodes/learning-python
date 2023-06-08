@@ -35,7 +35,7 @@ def play(user_choice):
             celeb2 = random.choice(data)
 
         print(
-            f"\n A.){celeb1['name']}\n {vs} \n\n B.){celeb2['name']}\n")
+            f"\n A.){celeb1['name']},a {celeb1['description']} from {celeb1['country']}.\n {vs} \n\n B.){celeb2['name']},a {celeb2['description']} from {celeb2['country']}.\n")
         user_answer = input(
             "Who is more popular ? Type 'A' or 'B' : ").upper()
         if check_answer(celeb1, celeb2, user_answer):
