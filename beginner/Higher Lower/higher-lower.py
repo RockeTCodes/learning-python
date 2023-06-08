@@ -26,13 +26,13 @@ user_choice = input(
 
 def play(user_choice):
     right_answers = 0
-
-    while user_choice == "y":
+    celeb1 = random.choice(data)
+    celeb2 = random.choice(data)
+    while celeb1 == celeb2:
         celeb1 = random.choice(data)
         celeb2 = random.choice(data)
-        while celeb1 == celeb2:
-            celeb1 = random.choice(data)
-            celeb2 = random.choice(data)
+
+    while user_choice == "y":
 
         print(
             f"\n A.){celeb1['name']},a {celeb1['description']} from {celeb1['country']}.\n {vs} \n\n B.){celeb2['name']},a {celeb2['description']} from {celeb2['country']}.\n")
@@ -43,15 +43,19 @@ def play(user_choice):
             print(logo)
             print("You answer is correct.")
             right_answers += 1
+            print(f"Current Score: {right_answers}.")
             time.sleep(1)
             clear()
             print(logo)
+            print(f"Current Score: {right_answers}.")
+            celeb1 = celeb2
+            celeb2 = random.choice(data)
 
         elif not check_answer(celeb1, celeb2, user_answer):
             clear()
             print(logo)
             print(
-                f"Game Over.You answered {right_answers} questions correctly.\n")
+                f"Game Over.You scored {right_answers}.\n")
             break
 
     play_again = input("Want to play again ? Type 'y' or 'n': ")
