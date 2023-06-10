@@ -1,9 +1,10 @@
 from os import name, system
 
-drinks = [{"name": "espresso☕", "price": 2.5, "water": 100, "milk": 100, "coffee": 100}, {
-    "name": "latte☕", "price": 3.75, "water": 100, "milk": 100, "coffee": 100}, {"name": "cappuccino☕", "price": 4.15, "water": 100, "milk": 100, "coffee": 100}]
+drinks = [{"name": "espresso☕", "money": 2.5, "water": 100, "milk": 100, "coffee": 100}, {
+    "name": "latte☕", "money": 3.75, "water": 100, "milk": 100, "coffee": 100}, {"name": "cappuccino☕", "money": 4.15, "water": 100, "milk": 100, "coffee": 100}]
 
-available_resources = {"water": 500, "milk": 400, "coffee": 400, "money": 0}
+available_resources = {"water": 500, "milk": 400, "coffee": 400}
+money = 0
 
 
 def ask_money():
@@ -15,14 +16,14 @@ def ask_money():
 
 
 def check_money(money_given, drink):
-    if money_given >= drinks[drink]["price"]:
+    if money_given >= drinks[drink]["money"]:
         return True
     else:
         return False
 
 
 def calculate_change(money_given, drink):
-    return money_given - drinks[drink]["price"]
+    return money_given - drinks[drink]["money"]
 
 
 def check_resources(drink, available_resources):
@@ -36,10 +37,10 @@ def check_resources(drink, available_resources):
 
 
 def use_resources(drink, available_resources):
-    available_resources["water"] -= drinks[drink]["water"]
-    available_resources["milk"] -= drinks[drink]["milk"]
-    available_resources["coffee"] -= drinks[drink]["coffee"]
-    available_resources["money"] += drinks[drink]["price"]
+    for resource in available_resources:
+        available_resources[resource] -= drinks[drink][resource]
+    global money
+    money += drinks[drink]["money"]
 
 
 def check_scarce_resource(drink, available_resources):
@@ -79,7 +80,7 @@ def print_report():
     print(f"Water: {available_resources['water']}ml")
     print(f"Milk: {available_resources['milk']}ml")
     print(f"Coffee: {available_resources['coffee']}g")
-    print(f"Money: {available_resources['money']}$")
+    print(f"Money: {money}$")
 
 
 want_more = True
