@@ -17,6 +17,9 @@ def ask_money():
 
 def check_money(money_given, drink):
     if money_given >= drinks[drink]["money"]:
+        change = round(calculate_change(money_given, drink), 2)
+        if change > 0:
+            print(f"Here is {change}$ in change.")
         return True
     else:
         return False
@@ -45,11 +48,11 @@ def use_resources(drink, available_resources):
 
 def check_scarce_resource(drink, available_resources):
     if available_resources["water"] < drinks[drink]["water"]:
-        print("Not enough water.Money Refunded.")
+        print("Not enough water.")
     elif available_resources["milk"] < drinks[drink]["milk"]:
-        print("Not enough milk.Money Refunded.")
+        print("Not enough milk.")
     elif available_resources["coffee"] < drinks[drink]["coffee"]:
-        print("Not enough coffee.Money Refunded.")
+        print("Not enough coffee.")
 
 
 def clear():
@@ -61,19 +64,16 @@ def clear():
 
 def make_drink(drink):
     clear()
-    money_given = ask_money()
-
-    if check_money(money_given, drink):
-        change = round(calculate_change(money_given, drink), 2)
-        if change > 0:
-            print(f"Here is {change}$ in change.")
-        if check_resources(drink, available_resources):
+    if check_resources(drink, available_resources):
+        money_given = ask_money()
+        if check_money(money_given, drink):
             use_resources(drink, available_resources)
             print(f"Enjoy your {drinks[drink]['name']}.")
-        elif not check_resources(drink, available_resources):
-            check_scarce_resource(drink, available_resources)
-    else:
-        print("Not given enough money.Money Refunded ")
+        else:
+            print("Not given enough money.Money Refunded ")
+
+    elif not check_resources(drink, available_resources):
+        check_scarce_resource(drink, available_resources)
 
 
 def print_report():
